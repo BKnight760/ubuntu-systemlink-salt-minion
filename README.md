@@ -25,6 +25,10 @@ At the time of creation, this installes the Salt Minion version 2017.7.4+dfsg1-1
 
 Stop the salt minion service so that python libraries and configuration files can be modified without having it try to connect during modification.
 ### 7.  Copy extmods from LinuxRT system onto Ubuntu system
+```mkdir /var/lib/salt/minion```
+
+```mkdir /var/lib/salt/minion/extmods```
+
 ```cp -r ./var/lib/salt/minion/extmods/* /var/lib/salt/minion/extmods/```
 
 This contains SystemLink specific modules, grains, and beacons that customize how the salt-minion behaves.
