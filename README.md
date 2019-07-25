@@ -16,8 +16,12 @@ Set ```deb http://repo.saltstack.com/apt/debian/9/amd64/latest stretch main``` a
 These steps were based on those from SaltStack directly:
 https://repo.saltstack.com/#debian
 
+The version of salt-minion in the Ubuntu 18.04 distribution is quite old (2017.7.4) and needs to be updated to a more recent version.  This adds the new feed to the aptitude package manager and installs the public key for that repo.  We define the URL to the repo in the saltstack.list.  This URL pins the verion to the latest repo, but it could be modified to point to a specific version if needed.  See the SaltStack documentation for more information.
+
 ### 4.  Update the package repository based on the newly added feeds
 ```suddo apt-get update```
+
+This ensures we're installing the latest packages from the feeds.
 
 ### 5.  Install python3-pip
 ```sudo apt-get install python3-pip```
@@ -30,7 +34,8 @@ This automatically installs the python libraries for communicating with the Syst
 ### 7.  Install Salt Minion
 ```sudo apt-get install salt-minion```
 
-At the time of creation, this installes the Salt Minion version 2017.7.4+dfsg1-1ubuntu18.04.1.  This is not the same version as what is installed on NI Linux RT, and so we'll have to modify a few files to get it to work.
+At the time of creation, this installs the latest salt-minion (2019.2.0 Flourine).
+
 ### 8.  Stop the salt-minion service
 ```/etc/init.d/salt-minion stop```
 
@@ -54,11 +59,11 @@ This configuration file sets some default behavior of the minion modules and spe
 ### 13.  Delete the master public key
 ```rm -rf /var/lib/salt/pki/minion/minion_master.pub```
 
-The master's public key will be wrong if you've ever connected to a different salt-master before.  Since it may automatically try to connect to a server when the salt-minion starts after installation, you may need to delete this to prevent mismatched master keys.
+The master's public key will be wrong if you've ever connected to a different salt-master before.  Since it may automatically try to connect to a server when the salt-minion starts after installation, you may need to delete this to prevent mismatched master keys.  It will obtain a new key from the master when it connects the next time.
 ### 14.  Restart the salt-minion
 ```/etc/init.d/salt-minion restart```
 
-Now that we've customized the salt-minion python code and the modules, we need to restar the service.
+Now that we've customized the salt-minion modules, we need to restart the service for them to take effect.
 
 ### 15.  Approve the minion in the SystemLink Systems Management UI
 The minion's security key now needs to be approved by the SystemLink server to allow the minion to connect.
@@ -69,7 +74,7 @@ http://localhost/#systemsmanagement/unapproved
 Verify the key is correct and click the 'Approve' button next to the minion you want to allow to connect.
 
 ### Verification
-Verify that ```/etc/natinst/niskyline/HttpConfigurations/http_master.json``` exists.
+Verify that ```/etc/natinst/niskyline/HttpConfigurations/http_master.json``` exists.  If the minion has successfully connected to the master, it will have automatically and securely transferred the HTTP connection information (including a generated API key) to the minion which the python SDK will use to connect.
 
 There will still be errors in the salt minion log about 'NoneType for grains is not subscriptable'.  This is OK.
 
