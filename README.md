@@ -3,6 +3,8 @@
 ### 1.  Install Ubuntu 18.04
 Ubuntu 18.04 comes with Python 3.6.8 installed by default.
 ### 2.  Install python3-pip
+```suddo apt-get update```
+
 ```sudo apt-get install python3-pip```
 
 This will be used in the next step to install the SystemLink python SDK
