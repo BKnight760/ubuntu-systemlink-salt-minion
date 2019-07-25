@@ -53,7 +53,7 @@ Edit ```/etc/salt/minion_id``` and set the identifier that you want to show up i
 ### 11.  Set the salt master host
 Edit ```/etc/salt/minion.d/master.conf``` to point to your SystemLink server.  This can be a fully-qualified domain name, hostname, or IP address as long as that resolves on your network.
 ### 12.  Copy systemlink.conf to /etc/salt/minion.d
-```cp ./systemlink.conf /etc/salt/minion.d/```
+```cp ./etc/salt/minion.d/systemlink.conf /etc/salt/minion.d/```
 
 This configuration file sets some default behavior of the minion modules and specific file paths where to put / find files.
 ### 13.  Delete the master public key
