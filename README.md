@@ -53,6 +53,11 @@ The master's public key will be wrong if you've ever connected to a different sa
 
 Now that we've customized the salt-minion python code and the modules, we need to restar the service.
 
+### 14.  Approve the minion in the SystemLink Systems Management UI
+The minion's security key now needs to be approved by the SystemLink server to allow the minion to connect.
+Modify the URL below to point to the SystemLink Server instead of localhost:
+http://localhost/#systemsmanagement/unapproved
+
 ### Verification
 Verify that ```/etc/natinst/niskyline/HttpConfigurations/http_master.json``` exists.
 
