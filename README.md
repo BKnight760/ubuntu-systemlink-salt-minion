@@ -41,6 +41,8 @@ At the time of creation, this installs the latest salt-minion (2019.2.0 Flourine
 
 Stop the salt minion service so that python libraries and configuration files can be modified without having it try to connect during modification.
 ### 9.  Copy extmods from LinuxRT system onto Ubuntu system
+```mkdir /var/lib/salt```
+
 ```mkdir /var/lib/salt/minion```
 
 ```mkdir /var/lib/salt/minion/extmods```
